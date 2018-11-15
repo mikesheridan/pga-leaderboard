@@ -1,4 +1,6 @@
-PGA Applicant Test - Leaderboard - Mike Sheridan
+## PGA Applicant Test - Leaderboard - Mike Sheridan
+
+This application displays a simple, generic score leaderboard, letting its users display, add, remove, and edit players.
 
 ## Dependencies
 
