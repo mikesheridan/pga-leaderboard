@@ -5,6 +5,8 @@ PGA Applicant Test - Leaderboard - Mike Sheridan
 * create-react-app - used to bootstrap
 * 
 
+---
+
 In the project directory, you can run:
 
 
