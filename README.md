@@ -2,6 +2,16 @@
 
 This application displays a simple, generic golf leaderboard, letting its users display, add, remove, and edit players.
 
+## Installation
+
+Clone the repo, navigate to the main directory and run:
+
+> npm install
+
+Then type the following to start the project:
+
+> npm start
+
 ## Dependencies
 
 * create-react-app - used to bootstrap
