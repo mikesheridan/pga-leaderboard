@@ -7,24 +7,64 @@ import TableRow from "@material-ui/core/TableRow";
 import TextField from "@material-ui/core/TextField";
 
 // variable containing jsx for the individual golfer rows
-const row = (golfer, index, header, handleRemove, startEditing, editIdx, handleChange, stopEditing) => {
-  const currentlyEditing = editIdx === index;    
+const row = (
+  golfer,
+  index,
+  handleRemove,
+  startEditing,
+  editIdx,
+  handleChange,
+  stopEditing
+) => {
+  const currentlyEditing = editIdx === index;
+
   return (
     <TableRow key={`tr-${index}`}>
-      <TableCell>{index + 1}</TableCell>
-      {/* Loop through the headers to populate table columns */}
-      {header.map((golferInstance, k) => {
-        
-        return (
-          <TableCell key={`tc-${k}`}>{currentlyEditing ? <TextField name={golferInstance.prop} onChange={e => handleChange(e, golferInstance.prop, index)} value={golfer[golferInstance.prop]} /> : golfer[golferInstance.prop]}</TableCell>
-        );
-      })}
-      <TableCell>{currentlyEditing ? <i className="fas fa-check" onClick={() => stopEditing()}></i> : <i className="fas fa-edit" onClick={() => startEditing(index)} />}</TableCell>
-      <TableCell><i className="far fa-trash-alt" onClick={() => handleRemove(index)} /></TableCell>
+      <TableCell>
+        {currentlyEditing ? (
+          <TextField
+            name="lastName"
+            onChange={e => handleChange(e, "lastName", index)}
+            value={golfer.lastName}
+          />
+        ) : (
+          golfer.lastName
+        )}
+        ,&nbsp;
+        {currentlyEditing ? (
+          <TextField
+            name="firstName"
+            onChange={e => handleChange(e, "firstName", index)}
+            value={golfer.firstName}
+          />
+        ) : (
+          golfer.firstName
+        )}
+      </TableCell>
+      <TableCell>
+        {currentlyEditing ? (
+          <TextField
+            name={"score"}
+            onChange={e => handleChange(e, "score", index)}
+            value={golfer.score}
+          />
+        ) : (
+          golfer.score
+        )}
+      </TableCell>
+      <TableCell>
+        {currentlyEditing ? (
+          <i className="fas fa-check" onClick={() => stopEditing()} />
+        ) : (
+          <i className="fas fa-edit" onClick={() => startEditing(index)} />
+        )}
+      </TableCell>
+      <TableCell>
+        <i className="far fa-trash-alt" onClick={() => handleRemove(index)} />
+      </TableCell>
     </TableRow>
-  )
-
-} 
+  );
+};
 
 const LeaderboardTable = props => {
   // sort the prop data
@@ -39,7 +79,6 @@ const LeaderboardTable = props => {
     <Table className="leaderboardTable">
       <TableHead>
         <TableRow>
-          <TableCell>Position</TableCell>
           {/* Create the Header Row based off prop header */}
           {props.header.map((heading, headingIndex) => (
             <TableCell key={headingIndex}>{heading.name}</TableCell>
@@ -50,7 +89,17 @@ const LeaderboardTable = props => {
       </TableHead>
       <TableBody>
         {/* Create the Golfer Row based off the sorted Data pulled from props */}
-        {sortedData.map((golfer, index) => row(golfer, index, props.header, props.handleRemove, props.startEditing, props.editIdx, props.handleChange,props.stopEditing))}
+        {sortedData.map((golfer, index) =>
+          row(
+            golfer,
+            index,
+            props.handleRemove,
+            props.startEditing,
+            props.editIdx,
+            props.handleChange,
+            props.stopEditing
+          )
+        )}
       </TableBody>
     </Table>
   );

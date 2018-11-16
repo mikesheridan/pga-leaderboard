@@ -17,34 +17,6 @@ Then type the following to start the project:
 * create-react-app - used to bootstrap
 * material UI - used for styling UI elements - Form and Table.
 * fontawesome - included script reference for delete and edit icon fonts
-* 
-
-## Requirements
-
-x Application must be written in React.
-
-The application must support the following main features:
-
-Have a form so users can:
-x add
-x edit players. 
-
-The form must include the following three fields: 
-x firstName:String, 
-x lastName:String, 
-- score:Integer[0,100]
-
-Display the leaderboard in a tabular format 
-x sorted by score, and lastName in ASCENDING order. Therefore, if two players have the same score, the sorting will fall back to lastName
-- The names displayed on the leaderboard should be combined into one field when displaying as such: lastName, firstName
-x Have the ability to remove players by clicking a Delete button in the leaderboard.
-
-Bugs:
-- reranking when editing the score.  Ranks before you are done editing.
-- need to focus on First Name after submission
-
-Enhancement:
-- Add place ranking next to names
 
 ---
 

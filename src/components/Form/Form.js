@@ -5,8 +5,11 @@ import Button from "@material-ui/core/Button";
 class Form extends Component {
   state = {
     firstName: "",
+    firstNameLabel: "First Name",
     lastName: "",
-    score: ""
+    lastNameLabel: "Last Name",
+    score: "",
+    scoreLabel: "Score"
   };
 
   handleChange = name => event => {
@@ -15,36 +18,87 @@ class Form extends Component {
     });
   };
 
-  formHandler = event => {
+  //Validate the form fields
+  validate = () => {
+    let isError = false;
+    const errors = {
+      firstNameError: false,
+      lastNameError: false,
+      scoreError: false,
+      firstNameErrorText: "",
+      lastNameErrorText: "",
+      scoreErrorText: ""
+    };
+
+    if (this.state.firstName === "") {
+      isError = true;
+      errors.firstNameError = true;
+      errors.firstNameLabel = "Please enter a first name.";
+    }
+    if (this.state.lastName === "") {
+      isError = true;
+      errors.lastNameError = true;
+      errors.lastNameLabel = "Please enter a last name.";
+    }
+
+    if (isNaN(this.state.score) || this.state.score <= 0 || this.state.score >= 101) {     
+        isError = true;
+        errors.scoreError = true;
+        errors.scoreLabel = "Score between 1 and 100";      
+    }
+
+    //  Special Case
+    if(this.state.firstName === "Mike" && this.state.lastName === "Sheridan" && this.state.score <= 97) {
+      isError = true;
+      errors.scoreError = true;
+      errors.scoreLabel = "Don't lie on your scorecard.";
+    }
+    // update local state with error statuses
+    this.setState({
+      ...this.state,
+      ...errors
+    });
+
+    return isError;
+  };
+
+  handleSubmit = event => {
     // kill the normal form submission
     event.preventDefault();
+    // call validation
+    const validationError = this.validate();
 
-    // // create a random actionID to tag the entry for deltion/edit
-    // const randomActionID = Math.random().toString(36).substring(4);
-    // this.setState({
-    //     actionID: randomActionID
-    // });
-    // console.log(this.state);
+    // if no validation error proceed
+    if (!validationError) {
+      // pass the form data back to app.js
+      this.props.onSubmit(this.state);
 
-    // pass the form data back to app.js
-    this.props.onSubmit(this.state);
-
-    // clear the form fields
-    this.setState({
-      firstName: "",
-      lastName: "",
-      score: ""
-    });
+      // reset the form field state
+      this.setState({
+        firstName: "",
+        lastName: "",
+        score: "",
+        firstNameError: false,
+        lastNameError: false,
+        scoreError: false,
+        firstNameLabel: "First Name",
+        lastNameLabel: "Last Name",
+        scoreLabel: "Score"
+      });
+      
+      // focus the First name field for easier data population
+      document.getElementById("firstNameField").focus();
+    }
   };
 
   render() {
     return (
-      <React.Fragment>
-        <form onSubmit={this.formHandler}>
+        <form onSubmit={this.handleSubmit}>
           <div>
             <TextField
-              id="standard-name"
-              label="First Name"
+              error={this.state.firstNameError}
+              id="firstNameField"
+              label={this.state.firstNameLabel}
               className=""
               value={this.state.firstName}
               onChange={this.handleChange("firstName")}
@@ -52,8 +106,9 @@ class Form extends Component {
               style={{ marginRight: 1 + "rem" }}
             />
             <TextField
-              id="standard-name"
-              label="Last Name"
+              error={this.state.lastNameError}
+              id="lastNameField"
+              label={this.state.lastNameLabel}
               className=""
               value={this.state.lastName}
               onChange={this.handleChange("lastName")}
@@ -61,8 +116,9 @@ class Form extends Component {
               style={{ marginRight: 1 + "rem" }}
             />
             <TextField
-              id="standard-name"
-              label="Score"
+              error={this.state.scoreError}
+              id="scoreField"
+              label={this.state.scoreLabel}
               className=""
               value={this.state.score}
               onChange={this.handleChange("score")}
@@ -76,7 +132,6 @@ class Form extends Component {
             </Button>
           </div>
         </form>
-      </React.Fragment>
     );
   }
 }
