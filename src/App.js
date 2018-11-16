@@ -5,7 +5,31 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    golfers: []
+    golfers: [],
+    editIdx: -1
+  };
+
+  handleRemove = i => {
+    this.setState(state => ({
+      golfers: state.golfers.filter((row, j) => j !== i)
+    }));
+  };
+
+  startEditing = i => {
+    this.setState({ editIdx: i });
+  };
+
+  stopEditing = () => {
+    this.setState({ editIdx: -1 });
+  };
+
+  handleChange = (e, name, i) => {
+    const { value } = e.target;
+    this.setState(state => ({
+      golfers: state.golfers.map(
+        (row, j) => (j === i ? { ...row, [name]: value } : row)
+      )
+    }));
   };
 
   render() {
@@ -21,7 +45,12 @@ class App extends Component {
             })
           }
         />
-        <LeaderboardTable
+        <LeaderboardTable 
+            handleRemove={this.handleRemove}
+            startEditing={this.startEditing}
+            editIdx={this.state.editIdx}
+            stopEditing={this.stopEditing}
+            handleChange={this.handleChange}
           data={golfersData}
           header={[
             {
