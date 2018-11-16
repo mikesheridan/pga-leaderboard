@@ -5,6 +5,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
+// variable containing jsx for the individual golfer rows
 const row = (golfer, index, header) => (
   <TableRow key={`tr-${index}`}>
     {/* Loop through the headers to populate table columns */}
