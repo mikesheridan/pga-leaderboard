@@ -5,6 +5,7 @@ This application displays a simple, generic score leaderboard, letting its users
 ## Dependencies
 
 * create-react-app - used to bootstrap
+* material UI - UI out of the box
 * 
 
 ---
