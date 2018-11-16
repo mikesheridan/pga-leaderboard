@@ -1,17 +1,15 @@
 ## PGA Applicant Test - Leaderboard - Mike Sheridan
 
-This application displays a simple, generic score leaderboard, letting its users display, add, remove, and edit players.
+This application displays a simple, generic golf leaderboard, letting its users display, add, remove, and edit players.
 
 ## Dependencies
 
 * create-react-app - used to bootstrap
 * material UI - UI out of the box
+* fontawesome - included script reference for delete and edit icon fonts
 * 
 
 ---
-
-In the project directory, you can run:
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
